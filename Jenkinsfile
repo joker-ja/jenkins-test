@@ -18,7 +18,7 @@ pipeline {
         stage('测试') {
             steps {
                 //
-                echo '测试...'
+                echo '测试....'
             }
         }
         stage('打包') {
