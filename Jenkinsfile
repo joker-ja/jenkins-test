@@ -6,6 +6,11 @@ pipeline {
     }
 
     stages {
+        stage('环境监测') {
+            steps {
+                sh 'whoami'
+            }
+        }
         stage('编译') {
             agent {
                 docker {image 'golang:latest'}
