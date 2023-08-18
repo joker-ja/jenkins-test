@@ -1,5 +1,5 @@
 pipeline {
-
+    agent any
     environment {
         hello=123456
         world=456789
