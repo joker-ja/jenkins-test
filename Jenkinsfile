@@ -1,10 +1,18 @@
 pipeline {
-    agent any
+
+    environment {
+        hello=123456
+        world=456789
+    }
+
     stages {
         stage('编译') {
+            agent {
+                docker {image 'golang:latest'}
+            }
             steps {
                 //
-                echo '编译...'
+                sh 'go --version'
             }
         }
         stage('测试') {
