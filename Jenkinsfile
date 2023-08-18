@@ -17,7 +17,7 @@ pipeline {
             }
             steps {
                 //
-                sh 'go --version'
+                sh 'go version'
             }
         }
         stage('测试') {
