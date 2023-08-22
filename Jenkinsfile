@@ -40,7 +40,7 @@ pipeline {
         }
         stage('发送报告') {
             steps {
-                echo '开始发送报告.....'
+                echo '开始发送报告...'
                 emailext body: '''<!DOCTYPE html>
                 <html>
                 <head>
