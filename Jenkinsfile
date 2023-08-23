@@ -6,13 +6,14 @@ pipeline {
         stage('环境监测') {
             steps {
                 sh 'go version'
-                sh 'pwd && ls -alh'
-                sh 'go env'
-//                 sh 'go env -w GO111MODULE=on'
-//                 sh 'go env -w GOPROXY=https://goproxy.cn,direct'
                 sh 'printenv'
-                sh 'echo $GOPATH'
-//                 sh 'echo $GOPROXY'
+                sh 'pwd && ls -alh'
+                sh 'ls -alh /go'
+            }
+        }
+        stage('初始化环境') {
+            steps {
+                sh 'go env -w GOPROXY=https://goproxy.cn,direct'
                 sh 'go mod init go_test'
                 sh 'go mod tidy'
             }
