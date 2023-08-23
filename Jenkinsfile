@@ -12,6 +12,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: '2e98779c-545f-4ea3-b362-f69bf9cd2f9c', passwordVariable: 'aliyun_repo_pwd', usernameVariable: 'aliyun_repo_user')]) {
                     // some block
                     sh 'docker images -a'
+                    sh "echo ${aliyun_repo_user}"
+                    sh "echo ${aliyun_repo_pwd}"
                     sh "docker login -u ${aliyun_repo_user} -p ${aliyun_repo_pwd} registry.cn-hangzhou.aliyuncs.com"
                     sh "docker tag go_test registry.cn-hangzhou.aliyuncs.com/annnj/go_test:${IMAGE_VERSION}"
                     sh "docker push registry.cn-hangzhou.aliyuncs.com/annnj/go_test:${IMAGE_VERSION}"
