@@ -5,14 +5,14 @@ pipeline {
     stages {
         stage('环境监测') {
             steps {
-                sh 'export GO111MODULE=on'
-                sh "export GOPROXY='https://goproxy.cn,direct'"
                 sh 'printenv'
                 sh 'pwd && ls -alh'
             }
         }
         stage('初始化环境') {
             steps {
+                sh 'export GO111MODULE=on'
+                sh "export GOPROXY='https://goproxy.cn,direct'"
                 sh 'rm -f go.mod'
                 sh 'go mod init go_test'
                 sh 'printenv'
