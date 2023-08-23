@@ -1,8 +1,7 @@
 FROM golang
 
-RUN go mod init go_test && go mod tidy
 
-WORKDIR /opt/test/
-COPY . .
+RUN pwd && ls -alh
+RUN go mod init go_test && go mod tidy
 
 RUN go build -o go_test
