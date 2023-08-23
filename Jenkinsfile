@@ -11,14 +11,9 @@ pipeline {
         }
         stage('初始化环境') {
             steps {
-                sh 'export GO111MODULE=on'
-                sh "export GOPROXY='https://goproxy.cn,direct'"
-                sh "source /etc/profile"
                 sh 'rm -f go.mod'
                 sh 'go mod init go_test'
-                sh 'printenv'
-                sh 'echo $GOPROXY'
-                sh 'go mod tidy'
+                sh "export GOPROXY='https://goproxy.cn,direct' && go mod tidy"
             }
         }
         stage('测试') {
