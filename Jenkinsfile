@@ -9,7 +9,7 @@ pipeline {
                 sh 'pwd && ls -alh'
                 sh 'printenv'
                 sh 'echo $GOPATH'
-                sh 'go mod init'
+                sh 'go mod init go_test'
                 sh 'go mod tidy'
             }
         }
