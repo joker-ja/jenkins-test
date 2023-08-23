@@ -1,46 +1,40 @@
 pipeline {
-    agent any
-    environment {
-        hello=123456
-        world=456789
+    agent {
+        docker {image 'golang:latest'}
     }
-
     stages {
         stage('环境监测') {
             steps {
-                sh 'whoami'
-            }
-        }
-        stage('编译') {
-            agent {
-                docker {image 'golang:latest'}
-            }
-            steps {
-                //
                 sh 'go version'
+                sh 'go mod init'
+                sh 'go mod tidy'
             }
         }
         stage('测试') {
             steps {
-                //
-                echo '测试...'
+                sh 'go run main.go'
             }
         }
-        stage('打包') {
+        stage('构建镜像') {
             steps {
-                //
-                echo '打包...'
+                sh 'docker build -t go_test .'
             }
         }
-        stage('部署') {
+        stage('推送镜像') {
             steps {
-                //
-                echo '部署...'
+                input message: '需要部署到线上吗？', ok: '需要', parameters: [text(defaultValue: 'v1.0', description: '线上环境需要部署的版本', name: 'IMAGE_VERSION')]
+                withCredentials([usernamePassword(credentialsId: '2e98779c-545f-4ea3-b362-f69bf9cd2f9c', passwordVariable: 'aliyun_repo_pwd', usernameVariable: 'aliyun_repo_user')]) {
+                    // some block
+                    sh 'docker images -a'
+                    sh "docker login -u ${aliyun_repo_user} -p ${aliyun_repo_pwd} registry.cn-hangzhou.aliyuncs.com"
+                    sh "docker tag go_test registry.cn-hangzhou.aliyuncs.com/annnj/go_test:${IMAGE_VERSION}"
+                    sh "docker push registry.cn-hangzhou.aliyuncs.com/annnj/go_test:${IMAGE_VERSION}"
+                }
             }
         }
         stage('发送报告') {
             steps {
-                echo '开始发送报告...'
+                sh 'echo 开始发送报告...'
                 emailext body: '''<!DOCTYPE html>
                 <html>
                 <head>
