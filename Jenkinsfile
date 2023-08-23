@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     stages {
         stage('环境监测') {
             steps {
