@@ -15,6 +15,8 @@ pipeline {
             steps {
                 sh 'rm -f go.mod'
                 sh 'go mod init go_test'
+                sh 'printenv'
+                sh 'echo $GOPROXY'
                 sh 'go mod tidy'
             }
         }
