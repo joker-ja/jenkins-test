@@ -13,6 +13,7 @@ pipeline {
         }
         stage('初始化环境') {
             steps {
+                sh 'go env'
                 sh 'go env -w GOPROXY=https://goproxy.cn,direct'
                 sh 'go mod init go_test'
                 sh 'go mod tidy'
