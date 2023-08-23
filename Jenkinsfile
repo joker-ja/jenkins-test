@@ -8,7 +8,7 @@ pipeline {
                 sh 'go version'
                 sh 'printenv'
                 sh 'pwd && ls -alh'
-                sh 'ls -alh /go'
+                sh 'ls -alh /go/bin'
             }
         }
         stage('初始化环境') {
