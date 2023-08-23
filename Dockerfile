@@ -8,4 +8,4 @@ RUN rm -f go.mod && \
     go env -w GOPROXY="https://goproxy.cn,direct" && \
     go mod init go_test && \
     go mod tidy
-RUN go build -o go_test && ./go_test
+RUN go build -o go_test
