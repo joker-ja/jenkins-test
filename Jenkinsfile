@@ -13,6 +13,7 @@ pipeline {
             steps {
                 sh 'export GO111MODULE=on'
                 sh "export GOPROXY='https://goproxy.cn,direct'"
+                sh "source /etc/profile"
                 sh 'rm -f go.mod'
                 sh 'go mod init go_test'
                 sh 'printenv'
