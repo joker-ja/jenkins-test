@@ -9,7 +9,7 @@ pipeline {
         stage('推送镜像') {
             steps {
                 input message: '需要部署到线上吗？', ok: '需要', parameters: [text(defaultValue: 'v1.0', description: '线上环境需要部署的版本', name: 'IMAGE_VERSION')]
-                withCredentials([usernamePassword(credentialsId: '2e98779c-545f-4ea3-b362-f69bf9cd2f9c', passwordVariable: 'aliyun_repo_pwd', usernameVariable: 'aliyun_repo_user')]) {
+                withCredentials([usernamePassword(credentialsId: 'aliyun-docker-repo', passwordVariable: 'aliyun_repo_pwd', usernameVariable: 'aliyun_repo_user')]) {
                     // some block
                     sh 'docker images -a'
                     sh "echo ${aliyun_repo_user}"
