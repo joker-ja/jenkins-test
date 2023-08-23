@@ -1,26 +1,6 @@
 pipeline {
-    agent {
-        docker {image 'golang:latest'}
-    }
+    agent any
     stages {
-        stage('环境监测') {
-            steps {
-                sh 'printenv'
-                sh 'pwd && ls -alh'
-            }
-        }
-        stage('初始化环境') {
-            steps {
-                sh 'rm -f go.mod'
-                sh 'go mod init go_test'
-                sh "export GOPROXY='https://goproxy.cn,direct' && go mod tidy"
-            }
-        }
-        stage('测试') {
-            steps {
-                sh 'go run main.go'
-            }
-        }
         stage('构建镜像') {
             steps {
                 sh 'docker build -t go_test .'
