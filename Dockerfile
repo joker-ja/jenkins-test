@@ -1,2 +1,2 @@
 FROM golang
-RUN ["/bin/sh", "-c", "go build"]
+RUN go build -o go_test
