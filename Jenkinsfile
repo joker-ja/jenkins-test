@@ -6,6 +6,7 @@ pipeline {
         stage('环境监测') {
             steps {
                 sh 'go version'
+                sh 'pwd && ls -alh'
                 sh 'go mod init'
                 sh 'go mod tidy'
             }
