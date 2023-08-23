@@ -7,6 +7,8 @@ pipeline {
             steps {
                 sh 'go version'
                 sh 'pwd && ls -alh'
+                sh 'printenv'
+                sh 'echo $GOPATH'
                 sh 'go mod init'
                 sh 'go mod tidy'
             }
