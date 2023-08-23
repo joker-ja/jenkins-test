@@ -1,17 +1,15 @@
 pipeline {
-    agent {
-        docker {image 'golang:latest'}
-    }
     stages {
         stage('环境监测') {
             steps {
-                sh 'go version'
                 sh 'printenv'
                 sh 'pwd && ls -alh'
-                sh 'ls -alh /go/bin'
             }
         }
         stage('初始化环境') {
+            agent {
+                docker {image 'golang:latest'}
+            }
             steps {
                 sh 'go env'
                 sh 'go env -w GOPROXY=https://goproxy.cn,direct'
