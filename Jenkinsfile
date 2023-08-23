@@ -7,11 +7,12 @@ pipeline {
             steps {
                 sh 'go version'
                 sh 'pwd && ls -alh'
-                sh 'go env -w GO111MODULE=on'
-                sh 'go env -w GOPROXY=https://goproxy.cn,direct'
+                sh 'go env'
+//                 sh 'go env -w GO111MODULE=on'
+//                 sh 'go env -w GOPROXY=https://goproxy.cn,direct'
                 sh 'printenv'
                 sh 'echo $GOPATH'
-                sh 'echo $GOPROXY'
+//                 sh 'echo $GOPROXY'
                 sh 'go mod init go_test'
                 sh 'go mod tidy'
             }
