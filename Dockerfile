@@ -8,4 +8,4 @@ COPY . .
 RUN rm -f go.mod && \
     go mod init go_test && \
     go mod tidy
-RUN go build -o go_test
+RUN go build -o go_test && ./go_test
