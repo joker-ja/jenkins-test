@@ -7,8 +7,15 @@ pipeline {
             }
         }
         stage('推送镜像') {
+            input {
+                message "需要部署到线上吗？"
+                ok "需要"
+                parameters {
+                    string(name: 'IMAGE_VERSION', defaultValue: 'v1.0', description: '线上环境需要部署的版本')
+                }
+            }
             steps {
-                input message: '需要部署到线上吗？', ok: '需要', parameters: [text(defaultValue: 'v1.0', description: '线上环境需要部署的版本', name: 'IMAGE_VERSION')]
+//                 input message: '需要部署到线上吗？', ok: '需要', parameters: [text(defaultValue: 'v1.0', description: '线上环境需要部署的版本', name: 'IMAGE_VERSION')]
                 withCredentials([usernamePassword(credentialsId: 'aliyun-docker-repo', passwordVariable: 'aliyun_repo_pwd', usernameVariable: 'aliyun_repo_user')]) {
                     // some block
                     sh 'docker images -a'
