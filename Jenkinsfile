@@ -13,6 +13,7 @@ pipeline {
         }
         stage('初始化环境') {
             steps {
+                sh 'rm -f go.mod'
                 sh 'go mod init go_test'
                 sh 'go mod tidy'
             }
