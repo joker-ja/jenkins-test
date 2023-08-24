@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('构建镜像') {
             steps {
-                sh 'docker build -t go_test .'
+                sh 'docker build -t --no-cache go_test .'
             }
         }
         stage('推送镜像') {
@@ -19,8 +19,6 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'aliyun-docker-repo', passwordVariable: 'aliyun_repo_pwd', usernameVariable: 'aliyun_repo_user')]) {
                     // some block
                     sh 'docker images -a'
-                    sh "echo ${aliyun_repo_user}"
-                    sh "echo ${aliyun_repo_pwd}"
                     sh "docker login -u ${aliyun_repo_user} -p ${aliyun_repo_pwd} registry.cn-hangzhou.aliyuncs.com"
                     sh "docker tag go_test registry.cn-hangzhou.aliyuncs.com/annnj/go_test:${IMAGE_VERSION}"
                     sh "docker push registry.cn-hangzhou.aliyuncs.com/annnj/go_test:${IMAGE_VERSION}"
