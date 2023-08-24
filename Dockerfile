@@ -9,4 +9,4 @@ RUN rm -f go.mod && \
     go mod init go_test && \
     go mod tidy
 RUN go build -o go_test
-ENTRYPOINT ./test
+ENTRYPOINT ./go_test
