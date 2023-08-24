@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('构建镜像') {
             steps {
-                sh 'docker build -t --no-cache go_test .'
+                sh 'docker build --no-cache -t go_test .'
             }
         }
         stage('推送镜像') {
